@@ -1,0 +1,39 @@
+https://support.shotgunsoftware.com/hc/en-us/articles/219042248-Stereo-hot-keys-mode
+Stereo hot-keys mode
+Alan Trombla August 17, 2018 09:54
+RV has an un-documented supplementary "stereo hotkeys" mode in which an additional set of stero-related hotkeys are active.   You enter or leave the mode with Alt-s (Option-s on Mac).  While the mode is active, these additional hotkeys are available:
+
+a  Anaglyph Mode
+d  Checked Mode
+k  Scanline Mode
+s  Side-by-Side Mode
+p  Side-by-Side Stereo Mode
+m  Mirrored Side-by-Side Stereo Mode
+x  Stereo Mode Off (DEPRECATED -- use alt-s (or option-s on the mac))
+h  Hardware Stereo Mode
+,  Left Eye Only Stereo Mode
+.  Right Eye Only Stereo Mode
+<  Left Eye Only Stereo Mode
+>  Right Eye Only Stereo Mode
+S  Swap Eyes
+o  Edit Global Relative Stereo Offset
+
+As of RV 3.10.2, we've added these hotkeys to the list above:
+
+z  Horizontal Squeezed Stereo Mode
+v  Vertical Squeezed Stereo Mode
+r  Edit Global Right-Eye Stereo Offset
+
+As of RV 3.12.11, we added a hotkey to turn stereo off,  especially useful in Presentation Mode:
+
+f  Turn OFF Stereo Display Mode (in Controller Window)
+
+As of RV 3.12.15, we changed the hotkey to turn stereo off, since "f" conflicts with frame. We also added "/" to reset stereo offsets:
+
+O  Turn OFF Stereo Display Mode (in Controller Window)
+/  Reset Stereo Offsets
+
+As of RV 3.12.19, we added a couple hotkeys to control the per-clip (per-source) stereo offset:
+
+c  Edit Source/Clip Stereo Offset
+R  Edit Source/Clip Right-Eye-Only Stereo Offset
