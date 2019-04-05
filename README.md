@@ -171,4 +171,3 @@ To compress:
 
 To extract:
 ```tar -zxvf archive_name.tar.gz```
-
