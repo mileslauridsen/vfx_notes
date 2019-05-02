@@ -85,6 +85,11 @@ Find a file with a .mov extension modified in last 2 days:
 find /path/to/search/ -mtime -2 -name "*.mov"
 ```
 
+Load every QT found into a single RV session:
+```
+find /path/to/search/ -mtime -2 -name "*.mov" -exec rv {} +
+```
+
 For more info:
 ```
 man find
