@@ -242,18 +242,27 @@ tar -zxvf archive_name.tar.gz
 
 
 ### bash
-#### Env Vars
+#### Environment Variables
+Setting a basic environment variable:
 ```
 export TEST_VAR="/some/path"
 ```
+
+Running a command to set a variable.
+In this case, the current directory:
+```
+export CURDIR=$(pwd)
+```
+
 
 #### Aliases
 ```
 alias ls_all='ls -l'
 ```
 
+
 ### tcsh
-#### Env Vars
+#### Environment Variables
 ```
 setenv TEST_VAR "/some/path"
 ```
