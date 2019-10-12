@@ -271,3 +271,9 @@ setenv TEST_VAR "/some/path"
 ```
 alias ls_all 'ls -l'
 ```
+
+## nuke
+
+### python
+
+### tcl
