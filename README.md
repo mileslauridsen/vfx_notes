@@ -275,5 +275,23 @@ alias ls_all 'ls -l'
 ## nuke
 
 ### python
+#### Shotgun
+All examples using Shotgun's demo projects
+
+Find all project names
+```python
+sg.find('Project',[],['name'])
+```
+
+Find info on a specific shot
+```python
+shot = 'bunny_150_0200'
+sg.find('Shot', [['project', 'is', {'type': 'Project', 'id': 70}], ['code', 'is', shot]], [ 'code', 'sg_status_list', 'tags', 'sg_sequence'])
+```
+
+Get all shots in a specific sequence
+```python
+sg.find('Shot', [['project', 'is', {'type': 'Project', 'id': 70}], ['sg_sequence', 'is', {'type': 'Sequence', 'id': 37, 'name': 'bunny_150'}]], ['code', 'sg_sequence', 'tags'])
+```
 
 ### tcl
