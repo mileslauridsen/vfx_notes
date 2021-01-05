@@ -9,12 +9,12 @@ Notes on various shells, shell commands, and programs used in VFX production.
 Read and print a file to the shell.
 
 Print the contents of file.txt:
-```
+```commandline
 cat file.txt
 ```
 
 For more info:
-```
+```commandline
 man cat
 ```
 
@@ -23,27 +23,27 @@ man cat
 Used to change file permissions. Useful for limiting or sharing access to files.
 
 Set file to execute/read/write access to user only:
-```
+```commandline
 chmod 700 /path/to/file
 ```
 
 Set file to read/write access to read/write for everyone:
-```
+```commandline
 chmod 666 /path/to/file
 ```
 
 To change all the directories to 755 (drwxr-xr-x):
-```
+```commandline
 find /path/to/file -type d -exec chmod 755 {} \;
 ```
 
 To change all the files to 644 (-rw-r--r--):
-```
+```commandline
 find /path/to/file -type f -exec chmod 644 {} \;
 ```
 
 For more info:
-```
+```commandline
 man chmod
 ```
 
@@ -52,24 +52,31 @@ man chmod
 Copy a file to a new location or a new name.
 
 Make a copy of an existing file in the same directory:
-```
+```commandline
 cp /path/to/file.txt /path/to/newfile.txt
 ```
 
 Copy a file to a different directory:
-```
+```commandline
 cp /path/to/file.txt /new/path/to/newfile.txt
 ```
 
 Copy an entire directory and it's contents to a different directory:
-```
+```commandline
 cp -r /path/to/dir /path/to/newdir
 ```
 
 For more info:
-```
+```commandline
 man cp
 ```
+
+
+#### ffmpeg
+ffmpeg is a video and audio encoder commonly used in vfx
+
+A number of useful examples of generating videos for a vfx pipeline are available here:
+https://trac.ffmpeg.org/wiki/Encode/VFX
 
 
 #### find
@@ -100,22 +107,22 @@ man find
 File pattern search tool.
 
 Find every line in a file that contains the text "file" in it:
-```
+```commandline
 grep 'file' /path/to/file.nk
 ```
 
 Find every line in every log file in a directory that contains the text "render" in it:
-```
+```commandline
 grep -r 'render' /path/to/files/*.log
 ```
 
 Find the path to every file that contains the text "compositing":
-```
+```commandline
 grep -rl 'compositing' /path/to/files/*.log
 ```
 
 For more info:
-```
+```commandline
 man grep
 ```
 
@@ -124,22 +131,22 @@ man grep
 Move files or directories.
 
 Move file to new location:
-```
+```commandline
 mv /source/path/file.txt /dest/path/file.txt
 ```
 
 Move folder to new location:
-```
+```commandline
 mv /source/path/dir /dest/path/dir
 ```
 
 Rename a file:
-```
+```commandline
 mv /source/path/file.txt /source/path/new_file.txt
 ```
 
 For more info:
-```
+```commandline
 man mv
 ```
 
