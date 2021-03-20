@@ -1,10 +1,9 @@
 # vfx_notes
-Notes on various shells, shell commands, and programs used in VFX production.
+Notes on various shells, shell commands, programs, and resources used in VFX production.
+
 
 ## shell
-
 ### common tools
-
 #### cat
 Read and print a file to the shell.
 
@@ -279,9 +278,185 @@ setenv TEST_VAR "/some/path"
 alias ls_all 'ls -l'
 ```
 
-## nuke
 
-### python
+### Nuke
+#### python
+
+Example of iterating through selected nodes
+```python
+for n in nuke.selectedNodes():
+    print n.name()
+```
+
+Same example but only using a specific node class
+```python
+for n in nuke.selectedNodes("Camera2"):
+    print n.name()
+```
+
+Get current script path
+```python
+print nuke.root().name()
+```
+
+Get selected node class
+```python
+print nuke.selectedNode().Class()
+```
+
+Looking through all nodes
+```python
+for n in nuke.allNodes():
+    if n.Class() == "Read":
+        print n.name()
+```
+
+Select a node by name
+```python
+nuke.toNode("Noise1")
+```
+
+Running tcl commands in python
+```python
+nuke.tcl("value label")
+```
+
+Setting defaults in menu.py or init.py. http://docs.thefoundry.co.uk/nuke/63/pythondevguide/basics.html
+```python
+nuke.knobDefault("Blur.size", "20")
+nuke.knobDefault("Read.exr.compression", "2")
+```
+
+Return an expression on a knob if it eists
+```python
+if knob.hasExpression():
+    origExpression = knob.toScript()
+```
+
+List all knobs on a node
+```python
+for n in nuke.selectedNodes().knobs():
+    print n
+```
+
+Set value on all Read nodes within a selected group
+```python
+for n in nuke.selectedNodes():
+    if n.Class() == "Group":
+        for s in n.nodes():
+            if s.Class() == "Read":
+                s['postage_stamp'].setValue(True)
+```
+
+#### tcl
+Useful expressions and tcl for Nuke
+
+On/Off in GUI mode
+```
+$gui
+$gui ? 1 : 0
+$gui ? 1 : 16 #scanline render
+```
+
+Use python wrapped in tcl
+```
+[python nuke.tcl("value gain")]
+```
+
+Check node directly above this one and return some values for a knob:
+```
+[value [value input[value 0].name].distortion2] + [value [value input[value 0].name].distortion1]  > 0 ? 1:0
+```
+
+Nuke Random Range between max and min values
+```
+(1.1 - .9) * random(t) + .9
+```
+
+Random curve expression
+```
+(random(1,frame*1)*1)+0
+```
+
+or just simplified:
+```
+random(1,frame)
+```
+
+This creates a curve containing random values between 0 and 1. The breakdown controls:
+```
+(random(seed,frame*frequency)*amplitude)+valueOffset
+```
+
+Simple html for label knobs
+```html
+<font color="red">Some red text</font> # change font color
+<font color="blue">Some blue text</font> # a different font color
+<font align="left">Left aligned text
+<b>Bold text</b> # bold text
+```
+
+Metadata get exr compression type
+```
+[metadata exr/compression]
+```
+
+Root dir
+```
+[file dirname [knob [topnode].file]]
+```
+
+Filename
+```
+[file tail [knob [topnode].file]]
+```
+
+Value of this node's first knob
+```
+[value this.first]
+```
+
+Value of the first input's first knob
+```
+[value this.input0.first]
+```
+
+Value of the second input's first knob
+```
+[value this.input1.first]
+```
+
+Value of top most node in chain's first knob
+```
+[value [topnode].first]
+```
+
+Retime a Camera with a Timewarp node named TimeWarp1.
+Useful when matchmove tracks the plate and then a retime is applied to match editorial.
+Place this expression on translate, rotate, and focal knobs
+```
+curve(TimeWarp1.lookup)
+```
+
+Useful for determining if sharpening is needed on retimes
+Example with a Timewarp node named Timewarp1
+```
+abs(rint(TimeWarp1.lookup)-TimeWarp1.lookup) > 0.15 ? 1:0
+```
+
+Using TCL lindex and split to get a specific portion of a file path
+In this case we split the directory separator "/" and choose the 3rd item in the resulting list
+```
+[ lindex [split [value [topnode].file] / ] 3 ]
+```
+
+Normalize
+```
+(value - valuesMin)/(ValuesMax - valuesMin)
+```
+
+
+### Python
 #### Shotgun
 All examples using Shotgun's demo projects
 
@@ -301,4 +476,71 @@ Get all shots in a specific sequence
 sg.find('Shot', [['project', 'is', {'type': 'Project', 'id': 70}], ['sg_sequence', 'is', {'type': 'Sequence', 'id': 37, 'name': 'bunny_150'}]], ['code', 'sg_sequence', 'tags'])
 ```
 
-### tcl
+
+## Resources
+### Color
+https://nick-shaw.github.io/cinematiccolor/cinematic-color.html#
+http://brucelindbloom.com/
+https://opencolorio.org/
+https://github.com/AcademySoftwareFoundation/OpenColorIO
+https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES
+https://github.com/AcademySoftwareFoundation/openexr-images
+https://www.colour-science.org/
+https://github.com/colour-science
+https://github.com/colour-science/OpenColorIO-Configs
+http://mikeboers.com/blog/2013/11/07/linear-raw-conversions
+https://nick-shaw.github.io/cinematiccolor/full-and-legal-ranges.html
+https://chrisbrejon.com/cg-cinematography/
+https://acescentral.com/
+https://www.babelcolor.com/colorchecker.htm
+
+### Delivery
+https://opencontent.netflix.com/
+
+### IT
+https://docs.ansible.com/ansible/latest/
+
+### Lighting and Lookdev
+https://lollypopman.com/lighting-club/
+https://academy.substance3d.com/courses/the-pbr-guide-part-1
+
+### Math
+https://en.wikipedia.org/wiki/Spherical_coordinate_system
+https://en.wikipedia.org/wiki/Rotation_matrix
+https://en.wikipedia.org/wiki/Euclidean_distance
+https://en.wikipedia.org/wiki/Feature_scaling
+https://en.wikipedia.org/wiki/Quaternion
+https://en.wikipedia.org/wiki/Transformation_matrix
+https://en.wikipedia.org/wiki/Sawtooth_wave
+https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/video-lectures/
+
+### Open Source
+https://github.com/FFmpeg/FFmpeg
+https://github.com/OpenImageIO/oiio
+https://github.com/AcademySoftwareFoundation
+https://github.com/AcademySoftwareFoundation/openvdb
+https://github.com/AcademySoftwareFoundation/openexr
+https://github.com/NatronGitHub/Natron
+https://github.com/alembic/alembic
+https://www.blender.org/
+
+### Optics and Cameras
+https://en.wikipedia.org/wiki/Circle_of_confusion
+https://jtra.cz/stuff/essays/bokeh/#what_is_bokeh
+https://vfxcamdb.com/
+
+
+### Pipeline
+https://github.com/pyblish/pyblish-base
+https://getavalon.github.io/2.0/
+
+### Python
+https://docs.python-guide.org/
+
+### Software
+http://vfxplatform.com/
+
+### Virtualization
+https://github.com/AcademySoftwareFoundation/aswf-docker
+https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+https://www.codementor.io/@jquacinella/docker-and-docker-compose-for-local-development-and-small-deployments-ph4p434gb
