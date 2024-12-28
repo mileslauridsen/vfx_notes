@@ -477,6 +477,31 @@ sg.find('Shot', [['project', 'is', {'type': 'Project', 'id': 70}], ['sg_sequence
 ```
 
 
+## Formulas
+### Focal Length
+```math
+​2 * atan(hap / (2 * focal)) * 180 / pi degrees( ​2 * atan(hap / (2 * focal)))
+```
+
+### Canon EXIF data
+Shutter
+```
+1 / (2^value)
+```
+
+```
+1 / (2^"6.32193") = 0.0125
+```
+
+Aperture
+```
+sqrt(2^value)
+```
+
+```
+sqrt(2^8) = 16
+```
+
 ## Resources
 ### Color
 https://nick-shaw.github.io/cinematiccolor/cinematic-color.html#
