@@ -279,8 +279,8 @@ alias ls_all 'ls -l'
 ```
 
 
-### Nuke
-#### python
+## Nuke
+### python
 
 Example of iterating through selected nodes
 ```python
@@ -348,7 +348,7 @@ for n in nuke.selectedNodes():
                 s['postage_stamp'].setValue(True)
 ```
 
-#### tcl
+### tcl
 Useful expressions and tcl for Nuke
 
 On/Off in GUI mode
@@ -456,8 +456,8 @@ Normalize
 ```
 
 
-### Python
-#### Shotgun
+## Python
+### Shotgun
 All examples using Shotgun's demo projects
 
 Find all project names
