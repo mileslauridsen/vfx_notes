@@ -48,15 +48,26 @@ man cat
 #### chmod
 Used to change file permissions. Useful for limiting or sharing access to files.
 
+**Quick safety note:** prefer least-privilege permissions first, then relax only if needed.
+
 Set file to execute/read/write access to user only:
 ```commandline
 chmod 700 /path/to/file
 ```
 
-Set file to read/write access to read/write for everyone:
+Set file to read/write for user and group (safer team-share default):
+```commandline
+chmod 660 /path/to/file
+```
+
+Set file to read/write for everyone (rare; potentially risky):
 ```commandline
 chmod 666 /path/to/file
 ```
+
+When to use / when not to use:
+- Use `660` when files are shared inside a trusted group and other users should have no access.
+- Avoid `666` for scripts, configs, or production assets; world-writable files can be modified by any local user.
 
 To change all the directories to 755 (drwxr-xr-x):
 ```commandline
@@ -132,6 +143,8 @@ man find
 #### grep
 File pattern search tool.
 
+**Quick compatibility note:** `grep -r` works widely, but `rg` (ripgrep) is usually faster for large trees and respects ignore files.
+
 Find every line in a file that contains the text "file" in it:
 ```commandline
 grep 'file' /path/to/file.nk
@@ -139,13 +152,23 @@ grep 'file' /path/to/file.nk
 
 Find every line in every log file in a directory that contains the text "render" in it:
 ```commandline
-grep -r 'render' /path/to/files/*.log
+grep -r --include='*.log' 'render' /path/to/files/
 ```
 
 Find the path to every file that contains the text "compositing":
 ```commandline
-grep -rl 'compositing' /path/to/files/*.log
+grep -rl --include='*.log' 'compositing' /path/to/files/
 ```
+
+Equivalent with ripgrep (recommended for large projects):
+```commandline
+rg -n 'render' /path/to/files/
+rg -l 'compositing' /path/to/files/
+```
+
+When to use / when not to use:
+- Use recursive search on scoped paths (show/shot/task folders) to avoid accidental full-filesystem scans.
+- Avoid running broad recursive searches from `/` or very large mount points unless you intentionally need that scope.
 
 For more info:
 ```commandline
@@ -316,13 +339,13 @@ alias ls_all 'ls -l'
 Example of iterating through selected nodes
 ```python
 for n in nuke.selectedNodes():
-    print n.name()
+    print(n.name())
 ```
 
 Same example but only using a specific node class
 ```python
 for n in nuke.selectedNodes("Camera2"):
-    print n.name()
+    print(n.name())
 ```
 
 Get current script path
@@ -339,7 +362,7 @@ Looking through all nodes
 ```python
 for n in nuke.allNodes():
     if n.Class() == "Read":
-        print n.name()
+        print(n.name())
 ```
 
 Select a node by name
@@ -367,8 +390,12 @@ if knob.hasExpression():
 List all knobs on a node
 ```python
 for n in nuke.selectedNodes().knobs():
-    print n
+    print(n)
 ```
+
+When to use / when not to use:
+- Use `print(...)` syntax for Python 3 compatibility (current Nuke versions are Python 3-based).
+- Avoid Python 2 `print` statements (`print x`) unless maintaining legacy scripts on older Nuke/Python 2 environments.
 
 Set value on all Read nodes within a selected group
 ```python
