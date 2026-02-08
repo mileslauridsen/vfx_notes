@@ -1,9 +1,36 @@
 # vfx_notes
 Notes on various shells, shell commands, programs, and resources used in VFX production.
 
+## Table of Contents
+- [Shell](#shell)
+  - [Common Tools](#common-tools)
+  - [Bash](#bash)
+  - [Tcsh](#tcsh)
+- [Nuke](#nuke)
+  - [Python (Nuke)](#python-nuke)
+  - [Tcl (Nuke)](#tcl-nuke)
+- [Python](#python)
+  - [Shotgun](#shotgun)
+- [Formulas](#formulas)
+  - [Focal Length](#focal-length)
+  - [Canon EXIF data](#canon-exif-data)
+- [Resources](#resources)
+  - [Color](#color)
+  - [Delivery](#delivery)
+  - [IT](#it)
+  - [Lighting and Lookdev](#lighting-and-lookdev)
+  - [Math](#math)
+  - [Open Source](#open-source)
+  - [Optics and Cameras](#optics-and-cameras)
+  - [Pipeline](#pipeline)
+  - [Python (Resources)](#python-resources)
+  - [Software](#software)
+  - [Virtualization](#virtualization)
 
-## shell
-### common tools
+<a id="shell"></a>
+## Shell
+<a id="common-tools"></a>
+### Common Tools
 #### cat
 Read and print a file to the shell.
 
@@ -247,7 +274,8 @@ tar -zxvf archive_name.tar.gz
 ```
 
 
-### bash
+<a id="bash"></a>
+### Bash
 #### Environment Variables
 Setting a basic environment variable:
 ```
@@ -267,7 +295,8 @@ alias ls_all='ls -l'
 ```
 
 
-### tcsh
+<a id="tcsh"></a>
+### Tcsh
 #### Environment Variables
 ```
 setenv TEST_VAR "/some/path"
@@ -279,8 +308,10 @@ alias ls_all 'ls -l'
 ```
 
 
+<a id="nuke"></a>
 ## Nuke
-### python
+<a id="python-nuke"></a>
+### Python
 
 Example of iterating through selected nodes
 ```python
@@ -348,7 +379,8 @@ for n in nuke.selectedNodes():
                 s['postage_stamp'].setValue(True)
 ```
 
-### tcl
+<a id="tcl-nuke"></a>
+### Tcl
 Useful expressions and tcl for Nuke
 
 On/Off in GUI mode
@@ -456,7 +488,9 @@ Normalize
 ```
 
 
+<a id="python"></a>
 ## Python
+<a id="shotgun"></a>
 ### Shotgun
 All examples using Shotgun's demo projects
 
@@ -477,12 +511,15 @@ sg.find('Shot', [['project', 'is', {'type': 'Project', 'id': 70}], ['sg_sequence
 ```
 
 
+<a id="formulas"></a>
 ## Formulas
+<a id="focal-length"></a>
 ### Focal Length
 ```math
 ​2 * atan(hap / (2 * focal)) * 180 / pi degrees( ​2 * atan(hap / (2 * focal)))
 ```
 
+<a id="canon-exif-data"></a>
 ### Canon EXIF data
 Shutter
 ```
@@ -502,7 +539,9 @@ sqrt(2^value)
 sqrt(2^8) = 16
 ```
 
+<a id="resources"></a>
 ## Resources
+<a id="color"></a>
 ### Color
 https://nick-shaw.github.io/cinematiccolor/cinematic-color.html#
 http://brucelindbloom.com/
@@ -519,16 +558,20 @@ https://chrisbrejon.com/cg-cinematography/
 https://acescentral.com/
 https://www.babelcolor.com/colorchecker.htm
 
+<a id="delivery"></a>
 ### Delivery
 https://opencontent.netflix.com/
 
+<a id="it"></a>
 ### IT
 https://docs.ansible.com/ansible/latest/
 
+<a id="lighting-and-lookdev"></a>
 ### Lighting and Lookdev
 https://lollypopman.com/lighting-club/
 https://academy.substance3d.com/courses/the-pbr-guide-part-1
 
+<a id="math"></a>
 ### Math
 https://en.wikipedia.org/wiki/Spherical_coordinate_system
 https://en.wikipedia.org/wiki/Rotation_matrix
@@ -539,6 +582,7 @@ https://en.wikipedia.org/wiki/Transformation_matrix
 https://en.wikipedia.org/wiki/Sawtooth_wave
 https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/video-lectures/
 
+<a id="open-source"></a>
 ### Open Source
 https://github.com/FFmpeg/FFmpeg
 https://github.com/OpenImageIO/oiio
@@ -549,22 +593,27 @@ https://github.com/NatronGitHub/Natron
 https://github.com/alembic/alembic
 https://www.blender.org/
 
+<a id="optics-and-cameras"></a>
 ### Optics and Cameras
 https://en.wikipedia.org/wiki/Circle_of_confusion
 https://jtra.cz/stuff/essays/bokeh/#what_is_bokeh
 https://vfxcamdb.com/
 
 
+<a id="pipeline"></a>
 ### Pipeline
 https://github.com/pyblish/pyblish-base
 https://getavalon.github.io/2.0/
 
+<a id="python-resources"></a>
 ### Python
 https://docs.python-guide.org/
 
+<a id="software"></a>
 ### Software
 http://vfxplatform.com/
 
+<a id="virtualization"></a>
 ### Virtualization
 https://github.com/AcademySoftwareFoundation/aswf-docker
 https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
